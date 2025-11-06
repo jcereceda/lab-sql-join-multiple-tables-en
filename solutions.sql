@@ -26,17 +26,17 @@ select
 	round((f.length),2) as "Average length"
 from 
 	film f
-    left join film_category fc on f.film_id = fc.category_id
+    left join film_category fc on f.film_id = fc.film_id
     inner join category c on fc.category_id = c.category_id
 group by c.category_id;
 
 -- 4. Which film categories are longest?
 select
 	c.name as category,
-	round((f.length),2) as "Average length"
+	sum(f.length) as "Total length"
 from 
 	film f
-    left join film_category fc on f.film_id = fc.category_id
+    left join film_category fc on f.film_id = fc.film_id
     inner join category c on fc.category_id = c.category_id
 group by c.category_id
 ORDER BY 2 DESC
